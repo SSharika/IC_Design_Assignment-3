@@ -1,0 +1,36 @@
+import os
+import csv
+
+# Function to extract data path delay from timing.txt file
+def extract_datapath_delay(file_path):
+    with open(file_path, 'r') as f:
+        lines = f.readlines()
+        for line in lines:
+            if "Data Path Delay" in line:
+                return float(line.split()[3][:-2])
+
+# Directory path where the code folder is located
+code_folder_path = "./code"
+
+# List to hold extracted data path delays
+datapath_delays = []
+
+# Iterate over directories inside the code folder
+for dir_name in os.listdir(code_folder_path):
+    dir_path = os.path.join(code_folder_path, dir_name)
+    if os.path.isdir(dir_path):
+        timing_file_path = os.path.join(dir_path, "timing.txt")
+        if os.path.exists(timing_file_path):
+            # Extract data path delay from timing.txt
+            datapath_delay = extract_datapath_delay(timing_file_path)
+            datapath_delays.append((dir_name, datapath_delay))
+
+# Write the extracted data path delays to a CSV file
+csv_file_path = "datapath_delays.csv"
+with open(csv_file_path, mode='w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(['Module', 'Data Path Delay'])
+    for module, delay in datapath_delays:
+        writer.writerow([module, delay])
+
+print("Data path delays extracted and saved to", csv_file_path)

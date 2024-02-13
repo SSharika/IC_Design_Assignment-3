@@ -1,0 +1,35 @@
+import csv
+
+# Read existing CSV file
+csv_file_path = "datapath_delays.csv"
+data = []
+with open(csv_file_path, mode='r') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        data.append(row)
+
+# Extract data from power.txt
+signals = None
+total_power = None
+static_power = None
+
+with open("power.txt", 'r') as f:
+    lines = f.readlines()
+    for line in lines:
+        if "Signals" in line:
+            signals = float(line.split(':')[1].strip())
+        elif "Total" in line:
+            total_power = float(line.split(':')[1].strip())
+        elif "Static Power" in line:
+            static_power = float(line.split(':')[1].strip())
+
+# Append extracted data to the existing data
+new_row = [signals, total_power, static_power]
+data.append(new_row)
+
+# Write the updated data to the CSV file
+with open(csv_file_path, mode='w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+
+print("Data appended to", csv_file_path)

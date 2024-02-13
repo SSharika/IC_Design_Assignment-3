@@ -1,0 +1,81 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:02:38 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Wed Feb 14 02:09:16 2024
+# Process ID: 23495
+# Current directory: /home/Sharika/icdesign
+# Command line: vivado -mode batch -source tcl_run.tcl
+# Log file: /home/Sharika/icdesign/vivado.log
+# Journal file: /home/Sharika/icdesign/vivado.jou
+#-----------------------------------------------------------
+source tcl_run.tcl
+# open_project [pwd]/Automation/Project_2.xpr
+Scanning sources...
+Finished scanning sources
+# set_property source_mgmt_mode None [current_project]
+# update_compile_order -fileset sources_1
+# set verilog_files [get_files -of_objects [get_filesets sources_1] -filter {FILE_TYPE == Verilog}]
+# foreach verilog_file $verilog_files {
+#     # Set the top module
+#     set_property top [string trimright  [file tail $verilog_file] ".v"] [current_fileset]
+#     
+#     # Update compile order
+# 
+#     
+#     # Reset and launch synthesis
+#     reset_run synth_1
+#     launch_runs synth_1 -jobs 12
+#     wait_on_run synth_1
+#     
+#     # Reset and launch implementation
+#     reset_run impl_1
+#     launch_runs impl_1 -jobs 12
+#     wait_on_run impl_1
+#     
+#     # Create a folder for the module
+#     set module_name [file rootname $verilog_file]
+#     file mkdir $module_name
+#     
+#     # Save reports in the module folder
+#     open_run impl_1
+#     report_power > $module_name/power.txt
+#     report_timing > $module_name/timing.txt
+#     report_utilization > $module_name/utilization.txt
+# }
+[Wed Feb 14 02:09:26 2024] Launched synth_1...
+Run output will be captured here: /home/Sharika/icdesign/Automation/Project_2.runs/synth_1/runme.log
+[Wed Feb 14 02:09:27 2024] Waiting for synth_1 to finish...
+
+*** Running vivado
+    with args -log adder.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source adder.tcl
+
+
+****** Vivado v2018.2 (64-bit)
+  **** SW Build 2258646 on Thu Jun 14 20:02:38 MDT 2018
+  **** IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source adder.tcl -notrace
+Command: synth_design -top adder -part xc7a200tfbg676-2
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a200t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a200t'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 23686 
+ERROR: [Synth 8-1725] cannot assign to memory registers directly [/home/Sharika/icdesign/code/simple_processor.v:40]
+ERROR: [Synth 8-2833] unpacked value/target cannot be used in assignment [/home/Sharika/icdesign/code/simple_processor.v:40]
+INFO: [Synth 8-2350] module simple_processor ignored due to previous errors [/home/Sharika/icdesign/code/simple_processor.v:1]
+Failed to read verilog '/home/Sharika/icdesign/code/simple_processor.v'
+INFO: [Common 17-83] Releasing license: Synthesis
+3 Infos, 0 Warnings, 0 Critical Warnings and 3 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Vivado Synthesis failed
+INFO: [Common 17-206] Exiting Vivado at Wed Feb 14 02:09:39 2024...
+[Wed Feb 14 02:09:39 2024] synth_1 finished
+wait_on_run: Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1400.098 ; gain = 0.000 ; free physical = 490081 ; free virtual = 627321
+ERROR: [Common 17-70] Application Exception: Failed to launch run 'impl_1' due to failures in the following run(s):
+synth_1
+These failed run(s) need to be reset prior to launching 'impl_1' again.
+
+INFO: [Common 17-206] Exiting Vivado at Wed Feb 14 02:09:39 2024...
